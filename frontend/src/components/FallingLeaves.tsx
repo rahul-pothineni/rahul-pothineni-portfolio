@@ -45,7 +45,7 @@ function generateLeaves(): LeafData[] {
     delay: -(Math.random() * 20),
     swayAmount: 30 + Math.random() * 60,
     rotation: Math.random() * 360,
-    opacity: 0.25 + Math.random() * 0.3,
+    opacity: 0.15 + Math.random() * 0.2,
     color: LEAF_COLORS[Math.floor(Math.random() * LEAF_COLORS.length)],
     path: LEAF_PATHS[Math.floor(Math.random() * LEAF_PATHS.length)],
   }));

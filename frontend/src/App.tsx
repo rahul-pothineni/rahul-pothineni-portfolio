@@ -14,6 +14,7 @@ interface AboutData {
 
 interface ContactData {
   email: string
+  phone: string
   github: string
   linkedin: string
 }
@@ -50,7 +51,7 @@ function ExperienceContent() {
   )
 }
 
-function AboutContent() {
+function AboutContent({ onNavigate }: { onNavigate: (page: string) => void }) {
   const [data, setData] = useState<AboutData | null>(null)
 
   useEffect(() => {
@@ -72,9 +73,16 @@ function AboutContent() {
               {data.skills.map((s) => <li key={s}>{s}</li>)}
             </ul>
           )}
-          {!data.bio && !data.education && data.skills.length === 0 && (
-            <p className="work-date">Coming soon.</p>
-          )}
+          
+          <p className="work-date">I'm currently a undergraduate junior pursuing a double major in Computer Science and Data Science from New York University!
+          I have a passion for learning, software, and AI!
+          </p>
+          <br />
+          <p className="work-date">Outside of school and work, I love to be in nature, try new restaurants, and I'm a huge sports fan (go Niners and Warriors!).
+          </p>
+          <br />
+          <p className="work-date">Feel free to <a className="contact-link" onClick={() => onNavigate('Contact')}>contact</a> me!</p>
+
         </div>
       ) : (
         <p className="work-date">Loading...</p>
@@ -97,15 +105,10 @@ function ContactContent() {
     <>
       <div className="section-label">CONTACT</div>
       {data ? (
-        <div className="section-body">
-          {data.email && <p><a href={`mailto:${data.email}`}>{data.email}</a></p>}
-          {data.github && (
-            <p><a href={data.github} target="_blank" rel="noopener noreferrer">GitHub</a></p>
-          )}
-          {data.linkedin && (
-            <p><a href={data.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
-          )}
-        </div>
+        <ul className="work-bullets">
+          {data.email && <li>Email: <a href={`mailto:${data.email}`}>{data.email}</a></li>}
+          {data.phone && <li>Phone: <a href={`tel:${data.phone}`}>{data.phone}</a></li>}
+        </ul>
       ) : (
         <p className="work-date">Loading...</p>
       )}
@@ -126,12 +129,12 @@ function App() {
 
   return (
     <div className="app">
-      <FallingLeaves />
+      {active === 'Experience' && <FallingLeaves />}
       <div className="left-header">
         <div className="site-name">Rahul Pothineni</div>
         <div className="page-content">
           {active === 'Experience' && <ExperienceContent />}
-          {active === 'About' && <AboutContent />}
+          {active === 'About' && <AboutContent onNavigate={setActive} />}
           {active === 'Contact' && <ContactContent />}
         </div>
       </div>

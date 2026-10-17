@@ -35,7 +35,8 @@ async def about():
 @app.get("/contact")
 async def contact():
     return {
-        "email": "",
+        "email": "rahulpot07@gmail.com",
+        "phone": "(408) 881-2494",
         "github": "https://github.com/rahul-pothineni",
         "linkedin": "https://www.linkedin.com/in/rahul-pothineni-a63244328/",
     }
