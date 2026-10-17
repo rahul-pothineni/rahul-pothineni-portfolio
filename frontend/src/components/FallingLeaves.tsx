@@ -45,7 +45,7 @@ function generateLeaves(): LeafData[] {
     delay: -(Math.random() * 20),
     swayAmount: 30 + Math.random() * 60,
     rotation: Math.random() * 360,
-    opacity: 0.25 + Math.random() * 0.45,
+    opacity: 0.25 + Math.random() * 0.3,
     color: LEAF_COLORS[Math.floor(Math.random() * LEAF_COLORS.length)],
     path: LEAF_PATHS[Math.floor(Math.random() * LEAF_PATHS.length)],
   }));
@@ -67,10 +67,10 @@ export default function FallingLeaves() {
 
         @keyframes leafFall {
           0% {
-            transform: translateY(-5vh) rotate(var(--start-rot));
+            transform: translate(10vw, -5vh) rotate(var(--start-rot));
           }
           100% {
-            transform: translateY(105vh) rotate(calc(var(--start-rot) + 720deg));
+            transform: translate(-15vw, 105vh) rotate(calc(var(--start-rot) + 720deg));
           }
         }
 
