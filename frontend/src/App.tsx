@@ -1,23 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import FallingLeaves from './components/FallingLeaves'
 import './App.css'
 
-const API_BASE = 'http://localhost:8000'
 const NAV_ITEMS = ['Experience', 'About', 'Contact', 'Resume'] as const
-
-interface AboutData {
-  name: string
-  bio: string
-  education: string
-  skills: string[]
-}
-
-interface ContactData {
-  email: string
-  phone: string
-  github: string
-  linkedin: string
-}
 
 function ExperienceContent() {
   return (
@@ -52,66 +37,30 @@ function ExperienceContent() {
 }
 
 function AboutContent({ onNavigate }: { onNavigate: (page: string) => void }) {
-  const [data, setData] = useState<AboutData | null>(null)
-
-  useEffect(() => {
-    fetch(`${API_BASE}/about`)
-      .then((res) => res.json())
-      .then(setData)
-      .catch(() => {})
-  }, [])
-
   return (
     <>
       <div className="section-label">ABOUT</div>
-      {data ? (
-        <div className="section-body">
-          {data.bio && <p>{data.bio}</p>}
-          {data.education && <p className="work-date">{data.education}</p>}
-          {data.skills.length > 0 && (
-            <ul className="work-bullets">
-              {data.skills.map((s) => <li key={s}>{s}</li>)}
-            </ul>
-          )}
-          
-          <p className="work-date">I'm currently a undergraduate junior pursuing a double major in Computer Science and Data Science from New York University!
-          I have a passion for learning, software, and AI!
-          </p>
-          <br />
-          <p className="work-date">Outside of school and work, I love to be in nature, try new restaurants, and I'm a huge sports fan (go Niners and Warriors!).
-          </p>
-          <br />
-          <p className="work-date">Feel free to <a className="contact-link" onClick={() => onNavigate('Contact')}>contact</a> me!</p>
-
-        </div>
-      ) : (
-        <p className="work-date">Loading...</p>
-      )}
+      <div className="section-body">
+        <p className="work-date">I'm currently a undergraduate junior pursuing a double major in Computer Science and Data Science from New York University!
+        I have a passion for learning, software, and AI!
+        </p>
+        <br />
+        <p className="work-date">Outside of school and work, I love to be in nature, try new restaurants, and I'm a huge sports fan (go Niners and Warriors!).
+        </p>
+        <br />
+        <p className="work-date">Feel free to <a className="contact-link" onClick={() => onNavigate('Contact')}>contact</a> me!</p>
+      </div>
     </>
   )
 }
 
 function ContactContent() {
-  const [data, setData] = useState<ContactData | null>(null)
-
-  useEffect(() => {
-    fetch(`${API_BASE}/contact`)
-      .then((res) => res.json())
-      .then(setData)
-      .catch(() => {})
-  }, [])
-
   return (
     <>
       <div className="section-label">CONTACT</div>
-      {data ? (
-        <ul className="work-bullets">
-          {data.email && <li>Email: <a href={`mailto:${data.email}`}>{data.email}</a></li>}
-          {data.phone && <li>Phone: <a href={`tel:${data.phone}`}>{data.phone}</a></li>}
-        </ul>
-      ) : (
-        <p className="work-date">Loading...</p>
-      )}
+      <ul className="work-bullets">
+        <li>Email: <a href="mailto:rahulpot07@gmail.com">rahulpot07@gmail.com</a></li>
+      </ul>
     </>
   )
 }
@@ -121,7 +70,7 @@ function App() {
 
   const handleNav = (item: string) => {
     if (item === 'Resume') {
-      window.open(`${API_BASE}/resume`, '_blank')
+      // TODO: link to resume PDF
       return
     }
     setActive(item)
@@ -142,7 +91,7 @@ function App() {
         {NAV_ITEMS.map((item, i) => (
           <button
             key={item}
-            className={`nav-link${active === item ? ' active' : ''}${item === 'Resume' ? '' : ''}`}
+            className={`nav-link${active === item ? ' active' : ''}`}
             style={{ animationDelay: `${0.4 + i * 0.1}s` }}
             onClick={() => handleNav(item)}
           >
