@@ -26,6 +26,13 @@ html, body {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+  }
+}
+
 body {
   font-family: var(--font-body);
   background: var(--bg-pastel);

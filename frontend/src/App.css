@@ -215,3 +215,54 @@
     opacity: 0.6;
   }
 }
+
+/* ── Mobile responsive ── */
+
+@media (max-width: 768px) {
+  .app {
+    min-width: unset;
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .left-header {
+    position: relative;
+    top: unset;
+    left: unset;
+    right: unset;
+    padding: 100px 24px 40px;
+  }
+
+  .page-content {
+    margin-top: 32px;
+  }
+
+  .nav {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    left: unset;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    padding: 40px 24px;
+  }
+
+  .section-label {
+    font-size: 2rem;
+  }
+
+  .site-name {
+    font-size: 1.5rem;
+  }
+}
