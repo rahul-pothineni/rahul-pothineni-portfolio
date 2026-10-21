@@ -27,7 +27,7 @@ function ExperienceContent() {
       </div>
       <div className="work-entry">
         <p className="work-role">Software Developer Intern at <strong>Beshton Software Inc.</strong></p>
-        <p className="work-date">Summer 2025 - Java, Spring Boot, OpenAI API, SQL</p>
+        <p className="work-date">Summer 2025 - Java, Spring Boot, OpenAI SDK, SQL</p>
         <ul className="work-bullets">
           <li>Created internal LLM Tooling to help HR categorize customer feedback and complaints autonomously</li>
         </ul>
@@ -70,7 +70,7 @@ function App() {
 
   const handleNav = (item: string) => {
     if (item === 'Resume') {
-      // TODO: link to resume PDF
+      window.open('/resume.pdf', '_blank')
       return
     }
     setActive(item)
