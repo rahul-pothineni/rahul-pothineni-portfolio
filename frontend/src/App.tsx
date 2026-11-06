@@ -2,7 +2,7 @@ import { useState } from 'react'
 import FallingLeaves from './components/FallingLeaves'
 import './App.css'
 
-const NAV_ITEMS = ['Experience', 'About', 'Contact', 'Resume'] as const
+const NAV_ITEMS = ['Experience', 'Projects', 'About', 'Contact', 'Resume'] as const
 
 function ExperienceContent() {
   return (
@@ -31,6 +31,53 @@ function ExperienceContent() {
         <ul className="work-bullets">
           <li>Created internal LLM Tooling to help HR categorize customer feedback and complaints autonomously</li>
         </ul>
+      </div>
+    </>
+  )
+}
+
+function ProjectsContent({ onNavigate }: { onNavigate: (page: string) => void }) {
+  return (
+    <>
+      <div className="section-label">RECENT PROJECTS</div>
+      <div className="work-entry">
+        <p className="work-role"><a className="project-link-plain" onClick={() => onNavigate('Project-1')} data-umami-event="project-youtube-agent">YouTube Agent for Students (Work in Progress)</a></p>
+        <p className="work-date">Python, Google ADK, Gemini API, Redis</p>
+        <ul className="work-bullets">
+          <li>A multi-agent system that finds relevent YouTube videos and the exact moments in the videos that answer a users question.</li>
+          <li>Built specifically to help me study for exams :) !</li>
+        </ul>
+      </div>
+      <div className="work-entry">
+        <p className="work-role"><a className="project-link" href="https://gymzy-six.vercel.app/" target="_blank" rel="noopener noreferrer" data-umami-event="project-gymzy">Gymzy</a></p>
+        <p className="work-date">Node.js, OpenAI SDK, Redis, PostgreSQL, TypeScript, React</p>
+        <ul className="work-bullets">
+          <li>An application to help gym newbies generate and track their workout plans! </li>
+        </ul>
+      </div>
+      <div className="work-entry">
+        <p className="work-role"><a className="project-link" href="https://github.com/rahul-pothineni/TwitchTell" target="_blank" rel="noopener noreferrer" data-umami-event="project-twitchtell">TwitchTell</a></p>
+        <p className="work-date">Python, Django, Kafka, PostgreSQL, TypeScript, React</p>
+        <ul className="work-bullets">
+          <li>An application that helps Twitch streamers and viewers analyze live stream chat data. Helping users detect jumps/dips in chat sentiment in real time!</li>
+        </ul>
+      </div>
+    </>
+  )
+}
+
+function ProjectDetailContent({ name, onBack }: { name: string; onBack: () => void }) {
+  const projectNames: Record<string, string> = {
+    'Project-1': 'YOUTUBE AGENT FOR STUDENTS',
+    'Project-2': 'GYMZY',
+    'Project-3': 'TWITCHTELL',
+  }
+  return (
+    <>
+      <a className="back-link" onClick={onBack}>&larr; Back to Projects</a>
+      <div className="section-label">{projectNames[name] ?? name}</div>
+      <div className="section-body">
+        <p className="work-date">Currently a work in progress. Exciting project details coming soon!</p>
       </div>
     </>
   )
@@ -78,20 +125,22 @@ function App() {
 
   return (
     <div className="app">
-      {active === 'Experience' && <FallingLeaves />}
+      {(active === 'Experience' || active === 'Projects' || active.startsWith('Project-')) && <FallingLeaves />}
       <div className="left-header">
         <div className="site-name">Rahul Pothineni</div>
         <div className="page-content">
           {active === 'Experience' && <ExperienceContent />}
+          {active === 'Projects' && <ProjectsContent onNavigate={setActive} />}
           {active === 'About' && <AboutContent onNavigate={setActive} />}
           {active === 'Contact' && <ContactContent />}
+          {active.startsWith('Project-') && <ProjectDetailContent name={active} onBack={() => setActive('Projects')} />}
         </div>
       </div>
       <nav className="nav">
         {NAV_ITEMS.map((item, i) => (
           <button
             key={item}
-            className={`nav-link${active === item ? ' active' : ''}`}
+            className={`nav-link${active === item || (item === 'Projects' && active.startsWith('Project-')) ? ' active' : ''}`}
             style={{ animationDelay: `${0.4 + i * 0.1}s` }}
             onClick={() => handleNav(item)}
             data-umami-event={`nav-${item.toLowerCase()}`}
