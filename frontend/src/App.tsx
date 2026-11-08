@@ -41,8 +41,8 @@ function ProjectsContent() {
     <>
       <div className="section-label">RECENT PROJECTS</div>
       <div className="work-entry">
-        <p className="work-role"><a className="project-link" href="https://github.com/rahul-pothineni/YTStep" target="_blank" rel="noopener noreferrer" data-umami-event="project-youtube-agent">YouTube Agent for Students (Work in Progress)</a></p>
-        <p className="work-date">Python, Google ADK, Gemini API, Redis</p>
+        <p className="work-role"><a className="project-link" href="https://github.com/rahul-pothineni/YTStep" target="_blank" rel="noopener noreferrer" data-umami-event="project-youtube-agent">YouTube Agent for Students</a></p>
+        <p className="work-date">Python, Google ADK, Gemini API</p>
         <ul className="work-bullets">
           <li>A multi-agent system that finds relevent YouTube videos and the exact moments in the videos that answer a users question.</li>
           <li>Built specifically to help me study for exams :) !</li>
