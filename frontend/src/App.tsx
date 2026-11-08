@@ -36,12 +36,12 @@ function ExperienceContent() {
   )
 }
 
-function ProjectsContent({ onNavigate }: { onNavigate: (page: string) => void }) {
+function ProjectsContent() {
   return (
     <>
       <div className="section-label">RECENT PROJECTS</div>
       <div className="work-entry">
-        <p className="work-role"><a className="project-link-plain" onClick={() => onNavigate('Project-1')} data-umami-event="project-youtube-agent">YouTube Agent for Students (Work in Progress)</a></p>
+        <p className="work-role"><a className="project-link" href="https://github.com/rahul-pothineni/YTStep" target="_blank" rel="noopener noreferrer" data-umami-event="project-youtube-agent">YouTube Agent for Students (Work in Progress)</a></p>
         <p className="work-date">Python, Google ADK, Gemini API, Redis</p>
         <ul className="work-bullets">
           <li>A multi-agent system that finds relevent YouTube videos and the exact moments in the videos that answer a users question.</li>
@@ -61,23 +61,6 @@ function ProjectsContent({ onNavigate }: { onNavigate: (page: string) => void })
         <ul className="work-bullets">
           <li>An application that helps Twitch streamers and viewers analyze live stream chat data. Helping users detect jumps/dips in chat sentiment in real time!</li>
         </ul>
-      </div>
-    </>
-  )
-}
-
-function ProjectDetailContent({ name, onBack }: { name: string; onBack: () => void }) {
-  const projectNames: Record<string, string> = {
-    'Project-1': 'YOUTUBE AGENT FOR STUDENTS',
-    'Project-2': 'GYMZY',
-    'Project-3': 'TWITCHTELL',
-  }
-  return (
-    <>
-      <a className="back-link" onClick={onBack}>&larr; Back to Projects</a>
-      <div className="section-label">{projectNames[name] ?? name}</div>
-      <div className="section-body">
-        <p className="work-date">Currently a work in progress. Exciting project details coming soon!</p>
       </div>
     </>
   )
@@ -125,22 +108,21 @@ function App() {
 
   return (
     <div className="app">
-      {(active === 'Experience' || active === 'Projects' || active.startsWith('Project-')) && <FallingLeaves />}
+      {(active === 'Experience' || active === 'Projects') && <FallingLeaves />}
       <div className="left-header">
         <div className="site-name">Rahul Pothineni</div>
         <div className="page-content">
           {active === 'Experience' && <ExperienceContent />}
-          {active === 'Projects' && <ProjectsContent onNavigate={setActive} />}
+          {active === 'Projects' && <ProjectsContent />}
           {active === 'About' && <AboutContent onNavigate={setActive} />}
           {active === 'Contact' && <ContactContent />}
-          {active.startsWith('Project-') && <ProjectDetailContent name={active} onBack={() => setActive('Projects')} />}
         </div>
       </div>
       <nav className="nav">
         {NAV_ITEMS.map((item, i) => (
           <button
             key={item}
-            className={`nav-link${active === item || (item === 'Projects' && active.startsWith('Project-')) ? ' active' : ''}`}
+            className={`nav-link${active === item ? ' active' : ''}`}
             style={{ animationDelay: `${0.4 + i * 0.1}s` }}
             onClick={() => handleNav(item)}
             data-umami-event={`nav-${item.toLowerCase()}`}
